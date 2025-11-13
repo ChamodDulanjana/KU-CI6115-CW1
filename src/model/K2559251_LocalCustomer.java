@@ -16,6 +16,7 @@ public class K2559251_LocalCustomer extends K2559251_Customer{
         this.nic = nic;
     }
 
+    // Implementing the abstract method from K2559251_Customer
     @Override
     public String getIdentifier() {
         return "Customer : " + getName() + " | NIC: " + getNic();

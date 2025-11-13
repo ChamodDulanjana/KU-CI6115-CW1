@@ -16,6 +16,7 @@ public class K2559251_ForeignCustomer extends K2559251_Customer{
         this.passport = passport;
     }
 
+    // Implementing the abstract method from K2559251_Customer
     @Override
     public String getIdentifier() {
         return "Customer : " + getName() + " | Passport: " + getPassport();
