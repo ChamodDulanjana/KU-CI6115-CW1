@@ -7,6 +7,7 @@ public class K2559251_Booking {
     private K2559251_Customer customer;
     private K2559251_Vehicle vehicle;
 
+    private LocalDate creationDate;     // Date when the booking was created
     private LocalDate startDate;
     private LocalDate endDate;          // This will be calculated
     private int numberOfDays;
@@ -26,6 +27,7 @@ public class K2559251_Booking {
         this.bookingId = "BK" + System.currentTimeMillis(); // Simple unique ID generation
         this.customer = customer;
         this.vehicle = vehicle;
+        this.creationDate = LocalDate.now();               // Set creation date to current date
         this.startDate = startDate;
         this.endDate = startDate.plusDays(numberOfDays);    // Calculate the end date automatically.
         this.numberOfDays = numberOfDays;
@@ -35,11 +37,18 @@ public class K2559251_Booking {
         this.status = K2559251_BookingStatus.PENDING;       // Initial status
     }
 
+    // This method called when the rental is finished and the car is returned.
+    public void completeRental(double actualKilometers) {
+        this.actualKilometers = actualKilometers;
+        this.status = K2559251_BookingStatus.COMPLETED;
+    }
+
     // Public Getters methods
 
     public String getBookingId() { return bookingId; }
     public K2559251_Customer getCustomer() { return customer; }
     public K2559251_Vehicle getVehicle() { return vehicle; }
+    public LocalDate getCreationDate() { return creationDate; }
     public LocalDate getStartDate() { return startDate; }
     public LocalDate getEndDate() { return endDate; }
     public int getNumberOfDays() { return numberOfDays; }
@@ -52,6 +61,26 @@ public class K2559251_Booking {
 
     public void setStatus(K2559251_BookingStatus status) {
         this.status = status;
+    }
+
+    public void setVehicle(K2559251_Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setNumberOfDays(int numberOfDays) {
+        this.numberOfDays = numberOfDays;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setEstimatedKilometers(double estimatedKm) {
+        this.estimatedKilometers = estimatedKm;
     }
 
     @Override
