@@ -4,6 +4,7 @@ import model.K2559251_Booking;
 import model.K2559251_Customer;
 import model.K2559251_Vehicle;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class K2559251_DataStore {
@@ -14,14 +15,10 @@ public class K2559251_DataStore {
     private final List<K2559251_Customer> customers; // POLYMORPHISM Demonstration - can hold objects of ANY child class (LocalCustomer, ForeignCustomer).
 
     // Constructor initializes the in-memory lists.
-    public K2559251_DataStore(
-            List<K2559251_Vehicle> vehicles,
-            List<K2559251_Booking> bookings,
-            List<K2559251_Customer> customers
-    ) {
-        this.vehicles = vehicles;
-        this.bookings = bookings;
-        this.customers = customers;
+    public K2559251_DataStore() {
+        this.vehicles = new ArrayList<>();
+        this.customers = new ArrayList<>();
+        this.bookings = new ArrayList<>();
     }
 
     // public methods for accessing the lists.
