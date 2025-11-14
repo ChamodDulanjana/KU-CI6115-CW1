@@ -17,6 +17,8 @@ public interface K2559251_CustomerService {
     K2559251_Customer addLocalCustomer(String nic, String name, String contactNumber, String email);
     K2559251_Customer addForeignCustomer(String passport, String name, String contactNumber, String email);
     K2559251_Customer findCustomerByIdentifier(String identifier); // identifier - The NIC/Passport of the customer to find.
+    K2559251_Customer findCustomerByContact(String contactNumber); // Find customer by contact number.
+    K2559251_Customer findCustomerByEmail(String email); // Find customer by email.
     List<K2559251_Customer> getAllCustomers();
     K2559251_Customer updateCustomer(String identifier, String newContactNumber, String newEmail); // identifier - The NIC/Passport of the customer to update.
 }
