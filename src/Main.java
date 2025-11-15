@@ -20,14 +20,14 @@ public class Main {
         System.out.println("Running demonstration as of date: " + TODAY + "\n");
         System.out.println("Student ID: K2559251\n");
 
-        // --- 1. SETUP: DEPENDENCY INJECTION ---
+        // DEPENDENCY INJECTION
         // We create all our objects. This is the "setup" phase.
-        System.out.println("--- 1. Initializing Services (Dependency Injection) ---");
+        System.out.println("--- Initializing Services (Dependency Injection) ---");
 
-        // 1a. Create the single DataStore (Repository)
+        // Create the single DataStore (Repository)
         K2559251_DataStore dataStore = new K2559251_DataStore();
 
-        // 1b. Create the FeeCalculator (Implementation)
+        // Create the FeeCalculator (Implementation)
         K2559251_FeeCalculator feeCalculator = new K2559251_FeeCalculatorImpl();
 
         // 1c. --- ABSTRACTION Demonstration (Interface) ---
@@ -40,9 +40,11 @@ public class Main {
         );
         System.out.println("Services Initialized.\n");
 
+        // -------------------------------------------------------------------------------------------------------------
+        System.out.println("================================================================================ \n");
 
-        // --- 2. DEMONSTRATING ENCAPSULATION & SERVICE ABSTRACTION ---
-        System.out.println("--- 2. Demo: Encapsulation (Adding Vehicles) ---");
+        // DEMONSTRATING ENCAPSULATION & SERVICE ABSTRACTION
+        System.out.println("--- Encapsulation (Adding Vehicles) ---");
 
         // The Main class only knows about 'addVehicle'.
         // The *implementation* (checking for duplicates, etc.) is hidden.
@@ -50,18 +52,22 @@ public class Main {
         K2559251_Vehicle car2 = vehicleService.addVehicle("V002", "Nissan Leaf", K2559251_VehicleCategory.ELECTRIC);
         K2559251_Vehicle car3 = vehicleService.addVehicle("V003", "BMW X5", K2559251_VehicleCategory.LUXURY_SUV);
 
-        System.out.println("Added Vehicle: " + car1.getModel());
-        System.out.println("Added Vehicle: " + car2.getModel());
+        System.out.println("Added Vehicle: \n" + " Car Id   - " +  car1.getCarId() + "\n Model    - " + car1.getModel() + "\n Category - " +  car1.getCategory()  + "\n Status   - " + car1.getAvailabilityStatus() + "\n");
+        System.out.println("Added Vehicle: \n" + " Car Id   - " +  car2.getCarId() + "\n Model    - " + car2.getModel() + "\n Category - " +  car2.getCategory()  + "\n Status   - " + car2.getAvailabilityStatus() + "\n");
+        System.out.println("Added Vehicle: \n" + " Car Id   - " +  car3.getCarId() + "\n Model    - " + car3.getModel() + "\n Category - " +  car3.getCategory()  + "\n Status   - " + car3.getAvailabilityStatus() + "\n");
 
-        // We can't do this (field is private): car1.availabilityStatus = ...
+        // We can't do this (field is private): car1.availabilityStatus = K2559251_AvailabilityStatus.UNDER_MAINTENANCE;
         // We must use the public method (setter), which is good Encapsulation.
         vehicleService.changeAvailabilityStatus(car3.getCarId(), K2559251_AvailabilityStatus.UNDER_MAINTENANCE);
         System.out.println("Vehicle " + car3.getCarId() + " status set via public method: " + car3.getAvailabilityStatus());
-        System.out.println();
+        System.out.println(" Car Id   - " +  car3.getCarId() + "\n Model    - " + car3.getModel() + "\n Category - " +  car3.getCategory()  + "\n Status   - " + car3.getAvailabilityStatus() + "\n");
 
 
-        // --- 3. DEMONSTRATING INHERITANCE & SUBTYPE POLYMORPHISM ---
-        System.out.println("--- 3. Demo: Inheritance & Polymorphism (Adding Customers) ---");
+        // -------------------------------------------------------------------------------------------------------------
+        System.out.println("================================================================================ \n");
+
+        // DEMONSTRATING INHERITANCE & SUBTYPE POLYMORPHISM
+        System.out.println("--- Inheritance & Polymorphism (Adding Customers) ---");
 
         // We create two different *types* of customers...
         K2559251_Customer cust1 = customerService.addLocalCustomer(
@@ -80,9 +86,11 @@ public class Main {
         }
         System.out.println();
 
+        // -------------------------------------------------------------------------------------------------------------
+        System.out.println("================================================================================ \n");
 
-        // --- 4. DEMONSTRATING AD-HOC POLYMORPHISM (METHOD OVERLOADING) ---
-        System.out.println("--- 4. Demo: Ad-hoc Polymorphism (Method Overloading) ---");
+        // DEMONSTRATING AD-HOC POLYMORPHISM (METHOD OVERLOADING)
+        System.out.println("--- Polymorphism (Method Overloading) ---");
 
         // Calling findVehicles(String)
         K2559251_Vehicle foundCar = vehicleService.findVehicles("V002");
@@ -94,9 +102,11 @@ public class Main {
         System.out.println("This is Polymorphism: The *same method name* 'findVehicles' was called");
         System.out.println("with different parameters, and the correct version was executed.\n");
 
+        // -------------------------------------------------------------------------------------------------------------
+        System.out.println("================================================================================ \n");
 
-        // --- 5. DEMONSTRATING BUSINESS LOGIC (BOOKING RULES) ---
-        System.out.println("--- 5. Demo: Business Logic & Rules (Bookings) ---");
+        // --- DEMONSTRATING BUSINESS LOGIC (BOOKING RULES) ---
+        System.out.println("--- Business Logic & Rules (Bookings) ---");
 
         // Rule 1: 3-Day Advance. (Today is 14-Nov. We try to book for 15-Nov)
         System.out.println("Test 1: Trying to book 1 day in advance (Should Fail)...");
@@ -135,8 +145,11 @@ public class Main {
         System.out.println();
 
 
-        // --- 6. DEMONSTRATING 2-DAY CANCEL RULE ---
-        System.out.println("--- 6. Demo: Business Logic (2-Day Cancel Rule) ---");
+        // -------------------------------------------------------------------------------------------------------------
+        System.out.println("================================================================================ \n");
+
+        // --- DEMONSTRATING 2-DAY CANCEL RULE ---
+        System.out.println("--- Business Logic (2-Day Cancel Rule) ---");
 
         // Today is 14-Nov. Booking B002 was created on 14-Nov.
         // We are within the 2-day window, so this should succeed.
@@ -152,8 +165,11 @@ public class Main {
         System.out.println();
 
 
-        // --- 7. DEMONSTRATING FINAL FEE CALCULATION ---
-        System.out.println("--- 7. Demo: Final Fee Calculation (B001) ---");
+        // -------------------------------------------------------------------------------------------------------------
+        System.out.println("================================================================================ \n");
+
+        // --- DEMONSTRATING FINAL FEE CALCULATION ---
+        System.out.println("--- Final Fee Calculation (B001) ---");
 
         System.out.println("Completing booking B001...");
         System.out.println("  - Rental was 7 days (Should get 10% discount).");

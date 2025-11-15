@@ -19,6 +19,9 @@ public class K2559251_BookingServiceImpl implements K2559251_BookingService {
     private final K2559251_VehicleService vehicleService;
     private final K2559251_FeeCalculator feeCalculator;
 
+    // A simple counter for generating unique booking IDs
+    private long bookingIdCounter = 0;
+
     // Constructor (Dependency Injection).
     public K2559251_BookingServiceImpl(K2559251_DataStore dataStore,
                                        K2559251_CustomerService customerService,
@@ -28,6 +31,11 @@ public class K2559251_BookingServiceImpl implements K2559251_BookingService {
         this.customerService = customerService;
         this.vehicleService = vehicleService;
         this.feeCalculator = feeCalculator;
+    }
+
+    private String getNextBookingId() {
+        this.bookingIdCounter++;
+        return "B" + String.format("%03d", this.bookingIdCounter);
     }
 
     @Override
@@ -87,6 +95,7 @@ public class K2559251_BookingServiceImpl implements K2559251_BookingService {
 
         // Create the new Booking object
         K2559251_Booking newBooking = new K2559251_Booking(
+                getNextBookingId(),
                 customer,
                 vehicle,
                 startDate,

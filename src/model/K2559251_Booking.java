@@ -19,12 +19,13 @@ public class K2559251_Booking {
     private K2559251_BookingStatus status;
 
     public K2559251_Booking(
+            String bookingId,
             K2559251_Customer customer,
             K2559251_Vehicle vehicle,
             LocalDate startDate,
             int numberOfDays,
             double estimatedKilometers) {
-        this.bookingId = "BK" + System.currentTimeMillis(); // Simple unique ID generation
+        this.bookingId = bookingId; // Simple unique ID
         this.customer = customer;
         this.vehicle = vehicle;
         this.creationDate = LocalDate.now();               // Set creation date to current date
